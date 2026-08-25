@@ -1,4 +1,4 @@
-# Bank Analytics Project Pratice 銀行客戶交易與商業行為分析練習
+# Bank Analytics Pratice
 
 ## Project Overview (專案簡介)
 本專案旨在透過 SQL 針對銀行客戶資料、帳戶類型及交易紀錄進行深入分析。透過資料清理、多表關聯 (JOIN)、聚合統計及視窗函數 (Window Functions)，拆解客戶消費習慣、高價值客群特徵與異常交易行為，為商業決策提供數據支持。

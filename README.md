@@ -1,13 +1,13 @@
-# 🏦 Bank Customer & Transaction Analytics (銀行客戶與交易行為分析專案)
+# Bank Customer & Transaction Analytics
 
-## 📌 專案背景與商業目的 (Business Context)
+## Business Context (專案背景與商業目的)
 本專案建立一個模擬的銀行關聯式資料庫 (PostgreSQL)，包含 `customers` (客戶表)、`accounts` (帳戶表) 與 `transactions` (交易紀錄表) 三張核心資料表。
 
 針對客戶基本資料與交易紀錄進行商業數據分析，目的在於透過 SQL 查詢解答核心營運問題，包括 **VIP 高價值客戶識別、沈睡高資產客戶喚醒、客群消費行為分群與營運月成長率 (MoM)**，為銀行行銷與風險管理團隊提供數據支持。
 
 ---
 
-## 🛠️ 使用技術 (Tech Stack)
+## Tech Stack (使用技術)
 - **Database**: PostgreSQL 25
 - **GUI Tool**: DBeaver
 - **SQL Skills**: 
@@ -16,9 +16,9 @@
 
 ---
 
-## 📊 核心商業問題與 SQL 解答 (Key Analysis & Insights)
+## Key analysis & Insights (核心商業問題與SQL解答)
 
-本專案解答以下 10 大銀行營運核心問題：
+本專案解答以下10大銀行營運核心問題：
 
 1. **分行區域客群分佈統計**：計算每個城市的客戶數量 (`COUNT`, `GROUP BY`)
 2. **客群年齡層財力分析**：劃分青年、壯年與熟齡層並計算平均存款 (`CASE WHEN`, `AVG`)
@@ -33,5 +33,5 @@
 
 ---
 
-## 🚀 專案腳本說明
-* **`bank_analytics_project.sql`**：包含完整建表語法、模擬數據填入以及 10 大商業分析查詢解答。
+## 專案腳本說明
+* **`bank_analytics_project.sql`**：包含完整建表語法、模擬數據填入以及10大商業分析查詢解答。

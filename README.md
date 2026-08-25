@@ -1,35 +1,45 @@
-# Bank Analytics Pratice
+# Bank Analytics Practice
 
-## Project Overview (專案簡介)
-本專案旨在透過 SQL 針對銀行客戶資料、帳戶類型及交易紀錄進行深入分析。透過資料清理、多表關聯 (JOIN)、聚合統計及視窗函數 (Window Functions)，拆解客戶消費習慣、高價值客群特徵與異常交易行為，為商業決策提供數據支持。
-
----
-
-## Database Schema (資料庫架構)
-專案建構於 **PostgreSQL** 環境，包含三張主要資料表：
-* **`customers`**：客戶基礎背景（年齡、性別、居住城市）。
-* **`accounts`**：客戶帳戶類型（支票/活存、定存/儲蓄）與帳戶餘額。
-* **`transactions`**：交易明細紀錄（存款、提款、轉帳、金額及時間）。
+A SQL-based data analytics project analyzing bank customer demographics, account types, and transaction behaviors to derive actionable business insights.
 
 ---
 
-## Key Analytics & Queries (分析重點與核心語法)
-
-### 1. 客戶畫像與地域分佈
-* 統計各城市的客戶總數與平均年齡。
-* 計算不同性別的平均帳戶餘額。
-
-### 2. 客戶價值與交易行為
-* 使用 `LEFT JOIN` 與 `GROUP BY` 計算每位客戶的總交易次數與總消費金額。
-* 找出存款餘額前 5 高的 VIP 客戶。
-
-### 3. 高級商業分析 (Advanced Analysis)
-* **視窗函數 (Window Functions)**：計算客戶歷史交易的累計金額與消費排名 (`RANK()`)。
-* **條件聚合 (CASE WHEN)**：劃分客戶年齡層（如：<30 青年、30-50 中壯年、>50 高齡）並分析其主要偏好的交易模式。
+## Project Overview
+This project aims to perform end-to-end data analysis on banking datasets using SQL. By applying data cleaning, multi-table joins (`JOIN`), aggregate statistics, and advanced window functions (`Window Functions`), the project explores customer spending habits, high-value customer characteristics, and transaction patterns to support data-driven business decisions.
 
 ---
 
-## Tech Stack (使用工具)
+## Key Business Insights & Recommendations
+* **Top Revenue Segment**: Middle-aged customers (30-50) hold over 60% of total deposit balances, presenting prime targets for wealth management services.
+* **Retention Alert**: Low-frequency transaction users exhibit higher churn risk; recommended targeted promotional campaigns for inactive accounts.
+
+---
+
+## Database Schema
+The database is built on **PostgreSQL** and consists of three core relational tables:
+* **`customers`**: Customer demographic data (Age, Gender, City).
+* **`accounts`**: Account details (Checking/Savings types, Current Balance).
+* **`transactions`**: Transaction records (Deposit, Withdrawal, Transfer, Amount, Timestamp).
+
+---
+
+## Key Analytics & Technical Highlights
+
+### 1. Customer Demographics & Regional Distribution
+* Analyzed total customer count and average age per city to identify primary target markets.
+* Calculated average account balances segmented by gender.
+
+### 2. Customer Lifetime Value & Behavioral Patterns
+* Leveraged `LEFT JOIN` and `GROUP BY` to compute total transaction frequency and overall spending per customer.
+* Identified the Top 5 VIP customers based on total savings balance.
+
+### 3. Advanced Business Analytics
+* **Window Functions**: Utilized `SUM() OVER()` and `RANK()` to track cumulative transaction history and evaluate spending rank per account.
+* **Conditional Aggregation (`CASE WHEN`)**: Segmented customers into distinct age cohorts (<30 Young Adults, 30-50 Middle-aged, >50 Seniors) to reveal channel/transaction type preferences.
+
+---
+
+## 🛠️ Tech Stack
 * **Database**: PostgreSQL
 * **Tool / IDE**: VS Code (with SQLTools Extension) / DBeaver
 * **Version Control**: Git & GitHub

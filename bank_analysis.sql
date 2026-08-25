@@ -1,6 +1,4 @@
--- ============================================================
 -- Bank Analytics Project Pratice
--- ============================================================
 
 -- 1. Delete Old Table
 DROP TABLE IF EXISTS transactions;
@@ -33,9 +31,7 @@ CREATE TABLE transactions (
     amount DECIMAL(12, 2)
 );
 
--- ============================================================
 -- 5. Insert Sample Data
--- ============================================================
 
 INSERT INTO customers (customer_id, customer_name, age, gender, city) VALUES
 (1, 'Alice', 25, 'Female', 'Taipei'),
@@ -83,10 +79,7 @@ INSERT INTO transactions (transaction_id, account_id, transaction_date, transact
 (19, 107, '2026-08-20', 'Deposit', 2000.00),
 (20, 103, '2026-08-22', 'Withdrawal', 1000.00);
 
-
--- ============================================================
 -- 6. 10 Business Analytics Queries
--- ============================================================
 
 -- Q1: 每個城市有多少客戶？ (分行區域客群分佈)
 SELECT 

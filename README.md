@@ -39,7 +39,7 @@ The database is built on **PostgreSQL** and consists of three core relational ta
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 * **Database**: PostgreSQL
 * **Tool / IDE**: VS Code (with SQLTools Extension) / DBeaver
 * **Version Control**: Git & GitHub

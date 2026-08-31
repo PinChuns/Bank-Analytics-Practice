@@ -119,10 +119,10 @@ SELECT
     COUNT(transaction_id) AS transaction_count
 FROM transactions
 GROUP BY month
-ORDER BY month;
+-- ORDER BY month;
 
 
--- Q5: 哪些客戶交易最頻繁？ (活躍用戶 MAU/DAU 識別)
+-- Q5: Which customers trade most frequently? 哪些客戶交易最頻繁？ (活躍用戶 MAU/DAU 識別)
 SELECT 
     c.customer_name,
     COUNT(t.transaction_id) AS total_transactions
@@ -134,7 +134,7 @@ HAVING COUNT(t.transaction_id) >= 3
 ORDER BY total_transactions DESC;
 
 
--- Q6: 存款與提款金額比例？ (資負結構與流動性分析)
+-- Q6: What is the ratio of deposit to withdrawal amounts? 存款與提款金額比例？ (資負結構與流動性分析)
 SELECT 
     SUM(CASE WHEN transaction_type = 'Deposit' THEN amount ELSE 0 END) AS total_deposits,
     SUM(CASE WHEN transaction_type = 'Withdrawal' THEN amount ELSE 0 END) AS total_withdrawals,
@@ -145,7 +145,7 @@ SELECT
 FROM transactions;
 
 
--- Q7: 找出交易金額最高的 Top 10 客戶 (高端 VIP 名單)
+-- Q7: Identify the top 10 customers by transaction amount. 找出交易金額最高的 Top10 客戶
 SELECT 
     c.customer_name,
     SUM(t.amount) AS total_amount
@@ -157,7 +157,7 @@ ORDER BY total_amount DESC
 LIMIT 10;
 
 
--- Q8: 找出「高餘額 (總資產>5萬) 但低交易 (交易筆數<=2)」的客戶 (沉睡高資產客戶喚醒)
+-- Q8: Identify customers with high balances (total assets > 50,000) but low transaction activity (number of transactions ≤ 2). 找出「高餘額 (總資產>5萬) 但低交易 (交易筆數<=2)」的客戶
 SELECT 
     c.customer_name,
     SUM(a.balance) AS total_balance,
@@ -169,7 +169,7 @@ GROUP BY c.customer_name
 HAVING SUM(a.balance) > 50000 AND COUNT(t.transaction_id) <= 2;
 
 
--- Q9: 比較不同城市/客群的平均單筆交易金額 (消費力道差異分析)
+-- Q9: Compare the average transaction amount across different cities or customer segments. 比較不同城市/客群的平均單筆交易金額 (消費力道差異分析)
 SELECT 
     c.city,
     ROUND(AVG(t.amount), 2) AS avg_transaction_amount
@@ -180,7 +180,7 @@ GROUP BY c.city
 ORDER BY avg_transaction_amount DESC;
 
 
--- Q10: 找出最近 3 個月交易金額成長最快的客戶 (高潛力用戶挖掘 - 使用視窗函數)
+-- Q10: Identify the customers with the fastest growth in transaction volume over the past three months. 找出近3個月交易金額成長最快的客戶
 WITH monthly_customer_spend AS (
     SELECT 
         c.customer_name,

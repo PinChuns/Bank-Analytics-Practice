@@ -18,8 +18,8 @@ CREATE TABLE customers (
 CREATE TABLE accounts (
     account_id INT PRIMARY KEY,
     customer_id INT REFERENCES customers(customer_id),
-    account_type VARCHAR(20), -- Checking (支票/活存), Savings (定存/儲蓄)
-    balance DECIMAL(12, 2)    -- Balance (帳戶餘額)
+    account_type VARCHAR(20), -- Checking, Savings
+    balance DECIMAL(12, 2)    -- Balance
 );
 
 -- 4. Transactions Table
@@ -27,7 +27,7 @@ CREATE TABLE transactions (
     transaction_id INT PRIMARY KEY,
     account_id INT REFERENCES accounts(account_id),
     transaction_date DATE,
-    transaction_type VARCHAR(20), -- Deposit (存款), Withdrawal (提款), Transfer (轉帳)
+    transaction_type VARCHAR(20), -- Deposit, Withdrawal, Transfer
     amount DECIMAL(12, 2)
 );
 
@@ -44,34 +44,34 @@ INSERT INTO customers (customer_id, customer_name, age, gender, city) VALUES
 INSERT INTO accounts (account_id, customer_id, account_type, balance) VALUES
 (101, 1, 'Checking', 5000.00),
 (102, 1, 'Savings', 12000.00),
-(103, 2, 'Checking', 80000.00), -- 高餘額但交易少
+(103, 2, 'Checking', 80000.00), 
 (104, 3, 'Savings', 250000.00),
 (105, 4, 'Checking', 15000.00),
-(106, 5, 'Savings', 500000.00), -- 高餘額但交易少
+(106, 5, 'Savings', 500000.00), 
 (107, 6, 'Checking', 1200.00);
 
 INSERT INTO transactions (transaction_id, account_id, transaction_date, transaction_type, amount) VALUES
--- 2026年5月交易
+-- 2026.05 transaction
 (1, 101, '2026-05-10', 'Deposit', 2000.00),
 (2, 101, '2026-05-15', 'Withdrawal', 500.00),
 (3, 104, '2026-05-20', 'Deposit', 50000.00),
 (4, 105, '2026-05-22', 'Withdrawal', 3000.00),
 
--- 2026年6月交易
+-- 2026.06 transaction
 (5, 101, '2026-06-05', 'Deposit', 3000.00),
 (6, 102, '2026-06-12', 'Deposit', 10000.00),
 (7, 104, '2026-06-18', 'Withdrawal', 12000.00),
 (8, 105, '2026-06-25', 'Deposit', 8000.00),
 (9, 107, '2026-06-28', 'Deposit', 1000.00),
 
--- 2026年7月交易
+-- 2026.07 transaction
 (10, 101, '2026-07-01', 'Withdrawal', 1500.00),
 (11, 101, '2026-07-08', 'Deposit', 5000.00),
 (12, 104, '2026-07-15', 'Deposit', 80000.00),
 (13, 105, '2026-07-20', 'Withdrawal', 2000.00),
 (14, 107, '2026-07-22', 'Withdrawal', 500.00),
 
--- 2026年8月交易
+-- 2026.08 transaction
 (15, 101, '2026-08-02', 'Deposit', 8000.00),
 (16, 101, '2026-08-10', 'Withdrawal', 2000.00),
 (17, 104, '2026-08-15', 'Deposit', 100000.00),
@@ -79,41 +79,40 @@ INSERT INTO transactions (transaction_id, account_id, transaction_date, transact
 (19, 107, '2026-08-20', 'Deposit', 2000.00),
 (20, 103, '2026-08-22', 'Withdrawal', 1000.00);
 
--- 6. 10 Business Analytics Queries
+-- 6. 10 Business Analytics Sample Queries
 
--- Q1: 每個城市有多少客戶？ (分行區域客群分佈)
+-- Q1: How many customers are there in each city? 每個城市有多少客戶？ (分行區域客群分佈)
 SELECT 
     city, 
     COUNT(customer_id) AS total_customers
 FROM customers
 GROUP BY city
-ORDER BY total_customers DESC;
+-- ORDER BY total_customers DESC;
 
 
--- Q2: 各年齡層平均存款多少？ (客群年齡層財力分析)
+-- Q2: What are the average savings across different age groups? 各年齡層平均存款多少？ (客群年齡層財力分析)
 SELECT 
     CASE 
-        WHEN c.age < 30 THEN '青年 (<30)'
-        WHEN c.age BETWEEN 30 AND 50 THEN '壯年 (30-50)'
-        ELSE '熟齡 (>50)'
+        WHEN c.age < 30 THEN 'Youth (<30)'
+        WHEN c.age BETWEEN 30 AND 50 THEN 'Middle-aged (30-50)'
+        ELSE 'Elderly (>50)'
     END AS age_group,
     ROUND(AVG(a.balance), 2) AS avg_balance
 FROM customers c
 JOIN accounts a ON c.customer_id = a.customer_id
 GROUP BY age_group
-ORDER BY avg_balance DESC;
+-- ORDER BY avg_balance DESC;
 
-
--- Q3: 哪種帳戶餘額最高？ (產品線存款總額評估)
+-- Q3: Which type of account has the highest balance? 哪種帳戶餘額最高？ (產品線存款總額評估)
 SELECT 
     account_type,
     SUM(balance) AS total_balance,
-    ROUND(AVG(balance), 2) AS avg_balance
+    -- ROUND(AVG(balance), 2) AS avg_balance
 FROM accounts
 GROUP BY account_type;
 
 
--- Q4: 每月交易總金額是多少？ (業務營運月成長趨勢)
+-- Q4: What is the total monthly transaction amount? 每月交易總金額是多少？ (業務營運月成長趨勢)
 SELECT 
     TO_CHAR(transaction_date, 'YYYY-MM') AS month,
     SUM(amount) AS total_transaction_amount,
